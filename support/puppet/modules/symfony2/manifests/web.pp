@@ -47,8 +47,8 @@ class symfony2::web($host, $port = 80, $phpmyadmin = false, $xdebug = false) {
         notify  => Service['apache'],
     }
 
-    file { "/etc/apache2/sites-enabled/00-default" :
-        ensure => absent,
+    exec { "disable_default_site" :
+        command => "a2dissite default",
         require => Package["apache"],
         notify  => Service['apache'],
     }
